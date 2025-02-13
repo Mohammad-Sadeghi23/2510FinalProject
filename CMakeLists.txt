@@ -3,4 +3,5 @@ project(2510FinalProject C)
 
 set(CMAKE_C_STANDARD 23)
 
-add_executable(2510FinalProject main.c)
+add_executable(2510FinalProject main.c
+        ted.c)
