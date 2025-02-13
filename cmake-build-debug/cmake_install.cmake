@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Moham/CLionProjects/2510FinalProject
+# Install script for directory: D:/Downloads/BCIT/Winter 2025/COMP2510 Procedural Programming/finalproject/2510FinalProject
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 # Set path to fallback-tool for dependency-resolution.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "D:/CLion 2024.3.1.1/bin/mingw/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "D:/Jetbrain/CLion 2024.3.2/bin/mingw/bin/objdump.exe")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -52,6 +52,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "C:/Users/Moham/CLionProjects/2510FinalProject/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "D:/Downloads/BCIT/Winter 2025/COMP2510 Procedural Programming/finalproject/2510FinalProject/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

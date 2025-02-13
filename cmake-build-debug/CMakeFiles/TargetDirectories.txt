@@ -1,3 +1,3 @@
-C:/Users/Moham/CLionProjects/2510FinalProject/cmake-build-debug/CMakeFiles/2510FinalProject.dir
-C:/Users/Moham/CLionProjects/2510FinalProject/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Moham/CLionProjects/2510FinalProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/Downloads/BCIT/Winter 2025/COMP2510 Procedural Programming/finalproject/2510FinalProject/cmake-build-debug/CMakeFiles/2510FinalProject.dir
+D:/Downloads/BCIT/Winter 2025/COMP2510 Procedural Programming/finalproject/2510FinalProject/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Downloads/BCIT/Winter 2025/COMP2510 Procedural Programming/finalproject/2510FinalProject/cmake-build-debug/CMakeFiles/rebuild_cache.dir
