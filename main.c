@@ -8,6 +8,7 @@
 #define MAX_PATIENTS 50
 
 int patientsIDs[MAX_PATIENTS] = {0};
+int patientsAge[MAX_PATIENTS] = {0};
 char patientsNames[MAX_PATIENTS][50];
 char patientsDiagnosis[MAX_PATIENTS][100];
 int roomNumber[MAX_PATIENTS] = {0};
