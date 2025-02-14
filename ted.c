@@ -86,6 +86,7 @@ void dischargePatient() {
 void manageDoctorSchedule() {
     puts("Managing doctors schedule.");
 
+
 #define DAYS_IN_WEEK 7
 #define SHIFTS_PER_DAY 3
 
