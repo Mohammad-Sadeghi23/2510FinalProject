@@ -43,19 +43,19 @@ cmake_force:
 SHELL = cmd.exe
 
 # The CMake executable.
-CMAKE_COMMAND = "D:\Jetbrain\CLion 2024.3.2\bin\cmake\win\x64\bin\cmake.exe"
+CMAKE_COMMAND = "D:\CLion 2024.3.3\bin\cmake\win\x64\bin\cmake.exe"
 
 # The command to remove a file.
-RM = "D:\Jetbrain\CLion 2024.3.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
+RM = "D:\CLion 2024.3.3\bin\cmake\win\x64\bin\cmake.exe" -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject"
+CMAKE_SOURCE_DIR = D:\CST\2510FinalProject
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\cmake-build-debug"
+CMAKE_BINARY_DIR = D:\CST\2510FinalProject\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/2510FinalProject.dir/depend.make
@@ -69,32 +69,32 @@ include CMakeFiles/2510FinalProject.dir/progress.make
 include CMakeFiles/2510FinalProject.dir/flags.make
 
 CMakeFiles/2510FinalProject.dir/main.c.obj: CMakeFiles/2510FinalProject.dir/flags.make
-CMakeFiles/2510FinalProject.dir/main.c.obj: D:/Downloads/BCIT/Winter\ 2025/COMP2510\ Procedural\ Programming/finalproject/2510FinalProject/main.c
+CMakeFiles/2510FinalProject.dir/main.c.obj: D:/CST/2510FinalProject/main.c
 CMakeFiles/2510FinalProject.dir/main.c.obj: CMakeFiles/2510FinalProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/2510FinalProject.dir/main.c.obj"
-	D:\Jetbrain\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2510FinalProject.dir/main.c.obj -MF CMakeFiles\2510FinalProject.dir\main.c.obj.d -o CMakeFiles\2510FinalProject.dir\main.c.obj -c "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\main.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\CST\2510FinalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/2510FinalProject.dir/main.c.obj"
+	"D:\CLion 2024.3.3\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2510FinalProject.dir/main.c.obj -MF CMakeFiles\2510FinalProject.dir\main.c.obj.d -o CMakeFiles\2510FinalProject.dir\main.c.obj -c D:\CST\2510FinalProject\main.c
 
 CMakeFiles/2510FinalProject.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/2510FinalProject.dir/main.c.i"
-	D:\Jetbrain\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\main.c" > CMakeFiles\2510FinalProject.dir\main.c.i
+	"D:\CLion 2024.3.3\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\CST\2510FinalProject\main.c > CMakeFiles\2510FinalProject.dir\main.c.i
 
 CMakeFiles/2510FinalProject.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/2510FinalProject.dir/main.c.s"
-	D:\Jetbrain\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\main.c" -o CMakeFiles\2510FinalProject.dir\main.c.s
+	"D:\CLion 2024.3.3\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\CST\2510FinalProject\main.c -o CMakeFiles\2510FinalProject.dir\main.c.s
 
 CMakeFiles/2510FinalProject.dir/ted.c.obj: CMakeFiles/2510FinalProject.dir/flags.make
-CMakeFiles/2510FinalProject.dir/ted.c.obj: D:/Downloads/BCIT/Winter\ 2025/COMP2510\ Procedural\ Programming/finalproject/2510FinalProject/ted.c
+CMakeFiles/2510FinalProject.dir/ted.c.obj: D:/CST/2510FinalProject/ted.c
 CMakeFiles/2510FinalProject.dir/ted.c.obj: CMakeFiles/2510FinalProject.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/2510FinalProject.dir/ted.c.obj"
-	D:\Jetbrain\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2510FinalProject.dir/ted.c.obj -MF CMakeFiles\2510FinalProject.dir\ted.c.obj.d -o CMakeFiles\2510FinalProject.dir\ted.c.obj -c "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\ted.c"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=D:\CST\2510FinalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/2510FinalProject.dir/ted.c.obj"
+	"D:\CLion 2024.3.3\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2510FinalProject.dir/ted.c.obj -MF CMakeFiles\2510FinalProject.dir\ted.c.obj.d -o CMakeFiles\2510FinalProject.dir\ted.c.obj -c D:\CST\2510FinalProject\ted.c
 
 CMakeFiles/2510FinalProject.dir/ted.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/2510FinalProject.dir/ted.c.i"
-	D:\Jetbrain\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\ted.c" > CMakeFiles\2510FinalProject.dir\ted.c.i
+	"D:\CLion 2024.3.3\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\CST\2510FinalProject\ted.c > CMakeFiles\2510FinalProject.dir\ted.c.i
 
 CMakeFiles/2510FinalProject.dir/ted.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/2510FinalProject.dir/ted.c.s"
-	D:\Jetbrain\CLION2~1.2\bin\mingw\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\ted.c" -o CMakeFiles\2510FinalProject.dir\ted.c.s
+	"D:\CLion 2024.3.3\bin\mingw\bin\gcc.exe" $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\CST\2510FinalProject\ted.c -o CMakeFiles\2510FinalProject.dir\ted.c.s
 
 # Object files for target 2510FinalProject
 2510FinalProject_OBJECTS = \
@@ -110,7 +110,7 @@ CMakeFiles/2510FinalProject.dir/ted.c.s: cmake_force
 2510FinalProject.exe: CMakeFiles/2510FinalProject.dir/linkLibs.rsp
 2510FinalProject.exe: CMakeFiles/2510FinalProject.dir/objects1.rsp
 2510FinalProject.exe: CMakeFiles/2510FinalProject.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable 2510FinalProject.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=D:\CST\2510FinalProject\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable 2510FinalProject.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\2510FinalProject.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -122,6 +122,6 @@ CMakeFiles/2510FinalProject.dir/clean:
 .PHONY : CMakeFiles/2510FinalProject.dir/clean
 
 CMakeFiles/2510FinalProject.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject" "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject" "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\cmake-build-debug" "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\cmake-build-debug" "D:\Downloads\BCIT\Winter 2025\COMP2510 Procedural Programming\finalproject\2510FinalProject\cmake-build-debug\CMakeFiles\2510FinalProject.dir\DependInfo.cmake" "--color=$(COLOR)"
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\CST\2510FinalProject D:\CST\2510FinalProject D:\CST\2510FinalProject\cmake-build-debug D:\CST\2510FinalProject\cmake-build-debug D:\CST\2510FinalProject\cmake-build-debug\CMakeFiles\2510FinalProject.dir\DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/2510FinalProject.dir/depend
 

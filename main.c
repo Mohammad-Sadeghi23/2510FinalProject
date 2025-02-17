@@ -5,11 +5,13 @@
 #include <stdio.h>
 #include <string.h>
 
+// Constants
 #define MAX_PATIENTS 50
 #define MAX_NAME_LENGTH 50
 #define DAYS_IN_WEEK 7
 #define SHIFTS_PER_DAY 3
 
+// Instance variables
 int patientsIDs[MAX_PATIENTS] = {0};
 int patientsAge[MAX_PATIENTS] = {0};
 char patientsNames[MAX_PATIENTS][MAX_NAME_LENGTH];
@@ -63,7 +65,7 @@ void addPatient() {
     int id;
     char name[50];
     int age;
-    char diagnosis[50];
+    char diagnosis[100];
     int roomNum;
 
     // getting patients id
@@ -182,7 +184,7 @@ void dischargePatient() {
 
     // loop through and find index of discharge patient
     // shift elements of all arrays down one
-    // so no there are no empty elements in middle of arrays
+    // so there are no empty elements in middle of arrays
     for (int i = 0; i < totalPatients; i++) {
         if (patientsIDs[i] == discharge_id) {
             for (int j = i; j < totalPatients - 1; j++) {
