@@ -8,6 +8,7 @@
 // Constants
 #define MAX_PATIENTS 50
 #define MAX_NAME_LENGTH 50
+#define MAX_DIG_LENGTH 100
 #define DAYS_IN_WEEK 7
 #define SHIFTS_PER_DAY 3
 
@@ -15,7 +16,7 @@
 int patientsIDs[MAX_PATIENTS] = {0};
 int patientsAge[MAX_PATIENTS] = {0};
 char patientsNames[MAX_PATIENTS][MAX_NAME_LENGTH];
-char patientsDiagnosis[MAX_PATIENTS][100];
+char patientsDiagnosis[MAX_PATIENTS][MAX_DIG_LENGTH];
 int roomNumber[MAX_PATIENTS] = {0};
 int totalPatients = 0;
 
@@ -63,9 +64,9 @@ void addPatient() {
     }
 
     int id;
-    char name[50];
+    char name[MAX_NAME_LENGTH];
     int age;
-    char diagnosis[100];
+    char diagnosis[MAX_DIG_LENGTH];
     int roomNum;
 
     // getting patients id
@@ -83,7 +84,7 @@ void addPatient() {
 
     // getting the patients name
     printf("Enter Patient Name: ");
-    fgets(name, 50, stdin);
+    fgets(name, MAX_NAME_LENGTH, stdin);
     name[strcspn(name,"\n")] = 0; // Remove newline
 
     // getting the patients age
@@ -95,7 +96,7 @@ void addPatient() {
 
     // getting the patients diagnosis
     printf("Enter Patient Diagnosis: ");
-    fgets(diagnosis, 100, stdin);
+    fgets(diagnosis, MAX_DIG_LENGTH, stdin);
     diagnosis[strcspn(diagnosis,"\n")] = 0; // Remove newline
 
     // getting the patients room number
@@ -143,7 +144,7 @@ void viewPatient() {
 
 void searchPatient() {
     int choice, id, index = -1;
-    char name[50];
+    char name[MAX_NAME_LENGTH];
 
     printf("Search by (1) ID or (2) Title: ");
     scanf("%d", &choice);
@@ -155,7 +156,7 @@ void searchPatient() {
         index = idExists(patientsIDs, totalPatients, id);
     } else if (choice == 2) {
         printf("Enter Patient Name: ");
-        fgets(name, 50, stdin);
+        fgets(name, MAX_NAME_LENGTH, stdin);
         name[strcspn(name, "\n")] = 0;
 
         for (int i = 0; i < totalPatients; ++i) {
