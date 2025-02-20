@@ -220,9 +220,28 @@ void searchPatient() {
     int choice, id, index = -1;
     char name[MAX_NAME_LENGTH];
 
-    printf("Search by (1) ID or (2) Name: ");
-    scanf("%d", &choice);
     getchar();
+
+
+    // Validating and getting the choice
+    do {
+        printf("Search by (1) ID or (2) Name: ");
+
+        // Check if the input is an integer
+        if (scanf("%d", &choice) != 1) {
+            // Clear invalid input (non-integer)
+            while (getchar() != '\n'); // consume invalid input until newline is encountered
+            printf("Invalid input! Please enter a valid integer.\n");
+        } else {
+            // Check if the choice is within the valid range
+            if (choice != 1 && choice != 2) {
+                printf("Choice must be 1 or 2.\n");
+            } else {
+                break; // valid input, exit the loop
+            }
+        }
+    } while (1);
+
 
     if (choice == 1) {
         printf("Enter Patient ID: ");
