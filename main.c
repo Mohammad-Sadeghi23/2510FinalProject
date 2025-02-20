@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 // Constants
 #define MAX_PATIENTS 50
@@ -97,9 +98,29 @@ void addPatient() {
     }
 
     // getting the patients name
-    printf("Enter Patient Name: ");
-    fgets(name, MAX_NAME_LENGTH, stdin);
-    name[strcspn(name,"\n")] = 0; // Remove newline
+    do {
+        printf("Enter Patient Name: ");
+        fgets(name, MAX_NAME_LENGTH, stdin);
+
+        // Remove newline character if it exists
+        name[strcspn(name, "\n")] = '\0';
+
+        // Validate if the name contains only alphabetic characters and spaces
+        int valid = 1; // Flag to check if the name is valid
+        for (int i = 0; name[i] != '\0'; i++) {
+            if (!isalpha(name[i]) && name[i] != ' ') {  // Check for invalid characters
+                valid = 0;
+                break;
+            }
+        }
+
+        if (valid) {
+            printf("Patient's name is: %s\n", name);
+            break; // Exit loop if the name is valid
+        } else {
+            printf("Invalid name! Please enter a name with only alphabetic characters and spaces.\n");
+        }
+    } while (1);
 
     // Validating and getting the patients age
     do {
@@ -121,6 +142,7 @@ void addPatient() {
     } while (1);
 
     // getting the patients diagnosis
+    getchar();
     printf("Enter Patient Diagnosis: ");
     fgets(diagnosis, MAX_DIG_LENGTH, stdin);
     diagnosis[strcspn(diagnosis,"\n")] = 0; // Remove newline
@@ -252,10 +274,19 @@ void manageDoctorSchedule() {
         switch (choice) {
             case 1:
                 // Assign a doctor to a shift
-                printf("Enter the day of the week (1=Monday, 7=Sunday): ");
-                scanf("%d", &day);
-                printf("Enter the shift (1=Morning, 2=Afternoon, 3=Evening): ");
-                scanf("%d", &shift);
+                do {
+                    printf("Enter the day of the week (1=Monday, 7=Sunday): ");
+                    scanf("%d", &day);
+                    getchar();
+                }
+                while (day>7 || day<1);
+
+                do {
+                    printf("Enter the shift (1=Morning, 2=Afternoon, 3=Evening): ");
+                    scanf("%d", &shift);
+
+                } while (shift < 1 || shift>3);
+
                 printf("Enter the doctor's name: ");
                 getchar();  // Consume the newline character from previous input
                 fgets(doctorName, MAX_NAME_LENGTH, stdin);
