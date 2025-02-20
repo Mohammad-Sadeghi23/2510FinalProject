@@ -83,12 +83,25 @@ void addPatient() {
     char diagnosis[MAX_DIG_LENGTH];
     int roomNum;
 
-    // getting patients id
+    // validating and getting patients id
     do {
         printf("Enter Patient ID (positive number): ");
-        scanf("%d", &id);
-        getchar(); // Consumes newline
-    } while (id <= 0);
+
+        // Check if the input is an integer
+        if (scanf("%d", &id) != 1) {
+            // Clear invalid input (non-integer)
+            while (getchar() != '\n'); // consume invalid input until newline is encountered
+            printf("Invalid input! Please enter a valid integer.\n");
+        } else {
+            // Check if the age is within the valid range
+            if (id <= 0) {
+                printf("Id must be 1 or higher.\n");
+            } else {
+                getchar(); // Consumes newline
+                break; // valid input, exit the loop
+            }
+        }
+    } while (1);
 
     // make sure the id is unique
     if (id <= 0 || idExists(patientsIDs, totalPatients, id) != -1) {
@@ -115,6 +128,7 @@ void addPatient() {
             if (age <= 0 || age >= 150) {
                 printf("Age must be between 1 and 149.\n");
             } else {
+                getchar(); // Consumes newline
                 break; // valid input, exit the loop
             }
         }
@@ -125,12 +139,25 @@ void addPatient() {
     fgets(diagnosis, MAX_DIG_LENGTH, stdin);
     diagnosis[strcspn(diagnosis,"\n")] = 0; // Remove newline
 
-    // getting the patients room number
+    // validating and getting the patients room number
     do {
         printf("Enter Patients Room Number (positive number): ");
-        scanf("%d", &roomNum);
-        getchar(); // Consumes newline
-    } while (roomNum <= 0);
+
+        // Check if the input is an integer
+        if (scanf("%d", &roomNum) != 1) {
+            // Clear invalid input (non-integer)
+            while (getchar() != '\n'); // consume invalid input until newline is encountered
+            printf("Invalid input! Please enter a valid integer.\n");
+        } else {
+            // Check if the age is within the valid range
+            if (roomNum < 0) {
+                printf("Room number cannot be negative.\n");
+            } else {
+                getchar(); // Consumes newline
+                break; // valid input, exit the loop
+            }
+        }
+    } while (1);
 
     // inputting values of new patient into arrays
     patientsIDs[totalPatients] = id;
