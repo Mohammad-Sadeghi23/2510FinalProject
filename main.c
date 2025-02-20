@@ -49,7 +49,7 @@ void menu() {
                 while (getchar() != '\n'); // consume invalid input until newline is encountered
                 printf("Invalid input! Please enter a valid integer.\n");
             } else {
-                // Check if the age is within the valid range
+                // Check if the choice is within the valid range
                 if (choice <= 0 || choice > 6) {
                     printf("Invalid input! Please enter a valid integer(1 to 6).\n");
                 } else {
@@ -94,7 +94,7 @@ void addPatient() {
             while (getchar() != '\n'); // consume invalid input until newline is encountered
             printf("Invalid input! Please enter a valid integer.\n");
         } else {
-            // Check if the age is within the valid range
+            // Check if the id is a positive integer
             if (id <= 0) {
                 printf("Id must be 1 or higher.\n");
             } else {
@@ -281,7 +281,7 @@ void dischargePatient() {
             while (getchar() != '\n'); // consume invalid input until newline is encountered
             printf("Invalid input! Please enter a valid integer.\n");
         } else {
-            // Check if the choice is within the valid range
+            // Check if the discharge_id is valid
             if (discharge_id <= 0) {
                 printf("Id must be 1 or higher.\n");
             } else {
