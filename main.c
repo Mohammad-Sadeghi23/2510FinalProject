@@ -146,7 +146,7 @@ void searchPatient() {
     int choice, id, index = -1;
     char name[MAX_NAME_LENGTH];
 
-    printf("Search by (1) ID or (2) Title: ");
+    printf("Search by (1) ID or (2) Name: ");
     scanf("%d", &choice);
     getchar();
 
