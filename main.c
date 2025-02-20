@@ -220,9 +220,6 @@ void searchPatient() {
     int choice, id, index = -1;
     char name[MAX_NAME_LENGTH];
 
-    getchar();
-
-
     // Validating and getting the choice
     do {
         printf("Search by (1) ID or (2) Name: ");
@@ -273,8 +270,25 @@ void searchPatient() {
 
 void dischargePatient() {
     int discharge_id;
-    printf("Enter Patient ID to discharge: ");
-    scanf("%d", &discharge_id);
+
+    // Validating and getting the patients id to be discharged
+    do {
+        printf("Enter Patient ID to discharge: ");
+
+        // Check if the input is an integer
+        if (scanf("%d", &discharge_id) != 1) {
+            // Clear invalid input (non-integer)
+            while (getchar() != '\n'); // consume invalid input until newline is encountered
+            printf("Invalid input! Please enter a valid integer.\n");
+        } else {
+            // Check if the choice is within the valid range
+            if (discharge_id <= 0) {
+                printf("Id must be 1 or higher.\n");
+            } else {
+                break; // valid input, exit the loop
+            }
+        }
+    } while (1);
 
     // loop through and find index of discharge patient
     // shift elements of all arrays down one
