@@ -33,7 +33,7 @@ void displaySchedule(char schedule[DAYS_IN_WEEK][SHIFTS_PER_DAY][MAX_NAME_LENGTH
 void menu() {
     int choice;
     do {
-        printf("\nLibrary Management System\n");
+        printf("\nHospital Management System\n");
         printf("1. Add a New Patient Record\n");
         printf("2. View All Patient Records\n");
         printf("3. Search for a Patient\n");
@@ -128,7 +128,7 @@ void addPatient() {
         }
 
         if (valid) {
-            printf("Patient's name is: %s\n", name);
+            printf("\nPatient's name is: %s\n", name);
             break; // Exit loop if the name is valid
         } else {
             printf("Invalid name! Please enter a name with only alphabetic characters and spaces.\n");
@@ -149,7 +149,6 @@ void addPatient() {
             if (age <= 0 || age >= 150) {
                 printf("Age must be between 1 and 149.\n");
             } else {
-                getchar(); // Consumes newline
                 break; // valid input, exit the loop
             }
         }
