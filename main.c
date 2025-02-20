@@ -39,9 +39,23 @@ void menu() {
         printf("4. Discharge a Patient\n");
         printf("5. Manage Doctor Schedule\n");
         printf("6. Exit\n");
-        printf("enter you choice: ");
-        scanf("%d", &choice);
-        getchar(); // Consume newline
+        do {
+            printf("Enter your choice: ");
+
+            // Check if the input is an integer
+            if (scanf("%d", &choice) != 1) {
+                // Clear invalid input (non-integer)
+                while (getchar() != '\n'); // consume invalid input until newline is encountered
+                printf("Invalid input! Please enter a valid integer.\n");
+            } else {
+                // Check if the age is within the valid range
+                if (choice <= 0 || choice > 6) {
+                    printf("Invalid input! Please enter a valid integer(1 to 6).\n");
+                } else {
+                    break; // valid input, exit the loop
+                }
+            }
+        } while (1);
 
         switch (choice) {
             case 1: addPatient(); break;
@@ -87,12 +101,24 @@ void addPatient() {
     fgets(name, MAX_NAME_LENGTH, stdin);
     name[strcspn(name,"\n")] = 0; // Remove newline
 
-    // getting the patients age
+    // Validating and getting the patients age
     do {
-        printf("Enter Patients Age (positive number): ");
-        scanf("%d", &age);
-        getchar(); // Consumes newline
-    } while (age <= 0);
+        printf("Enter Patient's Age (positive number between 1 and 149): ");
+
+        // Check if the input is an integer
+        if (scanf("%d", &age) != 1) {
+            // Clear invalid input (non-integer)
+            while (getchar() != '\n'); // consume invalid input until newline is encountered
+            printf("Invalid input! Please enter a valid integer.\n");
+        } else {
+            // Check if the age is within the valid range
+            if (age <= 0 || age >= 150) {
+                printf("Age must be between 1 and 149.\n");
+            } else {
+                break; // valid input, exit the loop
+            }
+        }
+    } while (1);
 
     // getting the patients diagnosis
     printf("Enter Patient Diagnosis: ");
