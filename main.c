@@ -234,6 +234,7 @@ void searchPatient() {
             if (choice != 1 && choice != 2) {
                 printf("Choice must be 1 or 2.\n");
             } else {
+                getchar(); // Consumes newline
                 break; // valid input, exit the loop
             }
         }
@@ -241,10 +242,28 @@ void searchPatient() {
 
 
     if (choice == 1) {
-        printf("Enter Patient ID: ");
-        scanf("%d", &id);
-        index = idExists(patientsIDs, totalPatients, id);
-    } else if (choice == 2) {
+        // Validating and getting the id
+        do {
+            printf("Enter Patient ID: ");
+
+            // Check if the input is an integer
+            if (scanf("%d", &id) != 1) {
+                // Clear invalid input (non-integer)
+                while (getchar() != '\n'); // consume invalid input until newline is encountered
+                printf("Invalid input! Please enter a valid integer.\n");
+            } else {
+                // Check if the id is within the valid range
+                if (id <= 0) {
+                    printf("Id must be 1 or higher.\n");
+                } else {
+                    index = idExists(patientsIDs, totalPatients, id);
+                    break; // valid input, exit the loop
+                }
+            }
+        } while (1);
+    }
+
+    else if (choice == 2) {
         printf("Enter Patient Name: ");
         fgets(name, MAX_NAME_LENGTH, stdin);
         name[strcspn(name, "\n")] = 0;
@@ -323,26 +342,58 @@ void manageDoctorSchedule() {
     int day, shift, choice;
 
     do {
-        printf("Doctor Schedule Management System\n");
+        printf("\nDoctor Schedule Management System\n");
         printf("1. Assign a doctor to a shift\n");
         printf("2. Display weekly schedule\n");
         printf("3. Exit\n");
         printf("Enter your choice: ");
-        scanf("%d", &choice);
+
+        // Validating and getting the choice
+        do {
+            // Check if the input is an integer
+            if (scanf("%d", &choice) != 1) {
+                // Clear invalid input (non-integer)
+                while (getchar() != '\n'); // consume invalid input until newline is encountered
+                printf("Invalid input! Please enter a valid integer.\n");
+            } else {
+                // Check if the id is within the valid range
+                if (choice < 1 || choice > 3) {
+                    printf("Please choose a choice between 1 and 3.\n");
+                } else {
+                    getchar(); // Consume new line
+                    break; // valid input, exit the loop
+                }
+            }
+        } while (1);
 
         switch (choice) {
             case 1:
-                // Assign a doctor to a shift
-                do {
-                    printf("Enter the day of the week (1=Monday, 7=Sunday): ");
-                    scanf("%d", &day);
-                    getchar();
+            // Assign a doctor to a shift
+            do {
+                printf("Enter the day of the week (1=Monday, 7=Sunday): ");
+                // Check if the input is an integer
+                if (scanf("%d", &day) != 1) {
+                    // Clear invalid input (non-integer)
+                    while (getchar() != '\n'); // consume invalid input until newline is encountered
+                    printf("Invalid input! Please enter a valid integer.\n");
+                } else {
+                    // Check if the id is within the valid range
+                    if (day > 7 || day < 1) {
+                        printf("Please choose a choice between 1 and 7.\n");
+                    } else {
+                        getchar(); // Consume new line
+                        break; // valid input, exit the loop
+                    }
                 }
-                while (day>7 || day<1);
+            } while (1);
 
                 do {
                     printf("Enter the shift (1=Morning, 2=Afternoon, 3=Evening): ");
-                    scanf("%d", &shift);
+                    if (scanf("%d", &shift) != 1) {
+                        // Clear invalid input (non-integer)
+                        while (getchar() != '\n'); // consume invalid input until newline is encountered
+                        printf("Invalid input! Please enter a valid integer.\n");
+                    }
 
                 } while (shift < 1 || shift>3);
 
