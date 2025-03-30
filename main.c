@@ -22,6 +22,7 @@ typedef struct Patient {
     int age;
     char diagnosis[MAX_DIG_LENGTH];
     int roomNumber;
+    char admissionDate[11]; // [PHASE 2 CHANGE]
     struct Patient *next;
 } Patient;
 
@@ -36,6 +37,7 @@ void manageDoctorSchedule();
 void displaySchedule(char schedule[DAYS_IN_WEEK][SHIFTS_PER_DAY][MAX_NAME_LENGTH]);
 void saveData(); // [PHASE 2 CHANGE]
 void loadData(); // [PHASE 2 CHANGE]
+void generateReports(); // [PHASE 2 CHANGE]
 
 void menu() {
     int choice;
@@ -47,7 +49,9 @@ void menu() {
         printf("3. Search for a Patient\n");
         printf("4. Discharge a Patient\n");
         printf("5. Manage Doctor Schedule\n");
-        printf("6. Exit\n");
+        printf("6. Save Data\n");
+        printf("7. Generate Reports\n");
+        printf("8. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         getchar();
@@ -58,10 +62,12 @@ void menu() {
             case 3: searchPatient(); break;
             case 4: dischargePatient(); break;
             case 5: manageDoctorSchedule(); break;
-            case 6: saveData(); printf("Exiting...\n"); break; // [PHASE 2 CHANGE]
+            case 6: saveData(); break;
+            case 7: generateReports(); break; // [PHASE 2 CHANGE]
+            case 8: printf("Exiting...\n"); break;
             default: printf("Invalid choice! Try again.\n");
         }
-    } while (choice != 6);
+    } while (choice != 8);
 }
 
 int idExists(int id) {
@@ -104,6 +110,10 @@ void addPatient() {
     printf("Enter Room Number: ");
     scanf("%d", &newPatient->roomNumber);
     getchar();
+
+    printf("Enter Admission Date (YYYY-MM-DD): ");
+    fgets(newPatient->admissionDate, 11, stdin);
+    newPatient->admissionDate[strcspn(newPatient->admissionDate, "\n")] = '\0';
 
     newPatient->next = head; // [PHASE 2 CHANGE]
     head = newPatient;
@@ -267,6 +277,58 @@ void loadData() {
         fclose(sf);
     }
 }
+
+void generateReports() {
+    int totalPatients = 0;
+    int roomUsage[1000] = {0}; // Assuming room numbers < 1000
+    FILE *rf = fopen("report.txt", "w");
+
+    if (!rf) {
+        printf("Error opening report file!\n");
+        return;
+    }
+
+    // Doctor schedule tracking
+    const char *days[] = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
+    int doctorShifts[DAYS_IN_WEEK][SHIFTS_PER_DAY] = {0};
+
+    // Count total patients, rooms, and print admission dates
+    Patient *temp = head;
+    fprintf(rf, "--- Report Summary ---\n");
+    fprintf(rf, "Admitted Patients:\n");
+
+    while (temp) {
+        fprintf(rf, "ID: %d, Name: %s, Age: %d, Diagnosis: %s, Room: %d, Admitted: %s\n",
+                temp->id, temp->name, temp->age, temp->diagnosis, temp->roomNumber, temp->admissionDate);
+        totalPatients++;
+        if (temp->roomNumber > 0 && temp->roomNumber < 1000)
+            roomUsage[temp->roomNumber]++;
+        temp = temp->next;
+    }
+
+    fprintf(rf, "\nTotal Current Patients: %d\n", totalPatients);
+
+    // Room Usage
+    fprintf(rf, "\nRoom Usage:\n");
+    for (int i = 0; i < 1000; i++) {
+        if (roomUsage[i] > 0)
+            fprintf(rf, "Room %d: Occupied\n", i);
+    }
+
+    // Doctor Schedule
+    fprintf(rf, "\nDoctor Shift Assignments:\n");
+    for (int i = 0; i < DAYS_IN_WEEK; i++) {
+        fprintf(rf, "%s:\t", days[i]);
+        for (int j = 0; j < SHIFTS_PER_DAY; j++) {
+            fprintf(rf, "Shift %d: %s\t", j + 1, strlen(schedule[i][j]) > 0 ? schedule[i][j] : "Unassigned");
+        }
+        fprintf(rf, "\n");
+    }
+
+    fclose(rf);
+    printf("Report successfully generated in 'report.txt'.\n");
+}
+
 
 int main() {
     menu();

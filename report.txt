@@ -1,0 +1,21 @@
+--- Report Summary ---
+Admitted Patients:
+ID: 3, Name: Mo, Age: 34, Diagnosis: dsf, Room: 23, Admitted: 
+ID: 1, Name: ted, Age: 15, Diagnosis: mentally sick, Room: 654, Admitted: 
+ID: 2, Name: Jason, Age: 50, Diagnosis: Concussion, Room: 465, Admitted: 
+
+Total Current Patients: 3
+
+Room Usage:
+Room 23: Occupied
+Room 465: Occupied
+Room 654: Occupied
+
+Doctor Shift Assignments:
+Mon:	Shift 1: 	Shift 2: Mohammad	Shift 3: 	
+Tue:	Shift 1: 	Shift 2: 	Shift 3: 	
+Wed:	Shift 1: 	Shift 2: 	Shift 3: 	
+Thu:	Shift 1: 	Shift 2: 	Shift 3: 	
+Fri:	Shift 1: 	Shift 2: 	Shift 3: 	
+Sat:	Shift 1: 	Shift 2: 	Shift 3: 	
+Sun:	Shift 1: 	Shift 2: 	Shift 3: 	
