@@ -14,6 +14,7 @@
 #define SHIFTS_PER_DAY 3
 #define PATIENT_FILE "patients.txt"
 #define SCHEDULE_FILE "schedule.txt"
+#define DISCHARGED_FILE "discharged.txt"
 
 // [PHASE 2 CHANGE] - Define a linked list node for patients
 typedef struct Patient {
@@ -22,12 +23,12 @@ typedef struct Patient {
     int age;
     char diagnosis[MAX_DIG_LENGTH];
     int roomNumber;
-    char admissionDate[11]; // [PHASE 2 CHANGE]
+    char admissionDate[11]; // Format: YYYY-MM-DD
     struct Patient *next;
 } Patient;
 
-Patient *head = NULL; // [PHASE 2 CHANGE] - Head of the patient linked list
-char schedule[DAYS_IN_WEEK][SHIFTS_PER_DAY][MAX_NAME_LENGTH] = {0}; // [PHASE 2 CHANGE] - Moved to global for persistence
+Patient *head = NULL;
+char schedule[DAYS_IN_WEEK][SHIFTS_PER_DAY][MAX_NAME_LENGTH] = {0};
 
 void addPatient();
 void viewPatients();
@@ -35,13 +36,17 @@ void searchPatient();
 void dischargePatient();
 void manageDoctorSchedule();
 void displaySchedule(char schedule[DAYS_IN_WEEK][SHIFTS_PER_DAY][MAX_NAME_LENGTH]);
-void saveData(); // [PHASE 2 CHANGE]
-void loadData(); // [PHASE 2 CHANGE]
-void generateReports(); // [PHASE 2 CHANGE]
+void saveData();
+void loadData();
+void generateReports();
+void admissionStatsByDate();
+void listDischargedByDate();
+void doctorUtilizationReport(); // [PHASE 2 FEATURE]
+void roomUsageReport(); // [PHASE 2 FEATURE]
 
 void menu() {
     int choice;
-    loadData(); // [PHASE 2 CHANGE]
+    loadData();
     do {
         printf("\nHospital Management System\n");
         printf("1. Add a New Patient Record\n");
@@ -51,7 +56,11 @@ void menu() {
         printf("5. Manage Doctor Schedule\n");
         printf("6. Save Data\n");
         printf("7. Generate Reports\n");
-        printf("8. Exit\n");
+        printf("8. Admission Stats by Date\n");
+        printf("9. List Discharged Patients by Date\n");
+        printf("10. Doctor Utilization Report\n");
+        printf("11. Room Usage Report\n");
+        printf("12. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         getchar();
@@ -63,11 +72,15 @@ void menu() {
             case 4: dischargePatient(); break;
             case 5: manageDoctorSchedule(); break;
             case 6: saveData(); break;
-            case 7: generateReports(); break; // [PHASE 2 CHANGE]
-            case 8: printf("Exiting...\n"); break;
+            case 7: generateReports(); break;
+            case 8: admissionStatsByDate(); break;
+            case 9: listDischargedByDate(); break;
+            case 10: doctorUtilizationReport(); break;
+            case 11: roomUsageReport(); break;
+            case 12: printf("Exiting...\n"); break;
             default: printf("Invalid choice! Try again.\n");
         }
-    } while (choice != 8);
+    } while (choice != 12);
 }
 
 int idExists(int id) {
@@ -169,26 +182,26 @@ void searchPatient() {
     printf("Patient not found.\n");
 }
 
-void dischargePatient() {
-    int id;
-    printf("Enter Patient ID to discharge: ");
-    scanf("%d", &id);
-    getchar();
-
-    Patient *temp = head, *prev = NULL;
-    while (temp) {
-        if (temp->id == id) {
-            if (prev) prev->next = temp->next;
-            else head = temp->next;
-            free(temp); // [PHASE 2 CHANGE]
-            printf("Patient discharged successfully!\n");
-            return;
-        }
-        prev = temp;
-        temp = temp->next;
-    }
-    printf("Patient ID not found.\n");
-}
+//void dischargePatient() {
+//    int id;
+//    printf("Enter Patient ID to discharge: ");
+//    scanf("%d", &id);
+//    getchar();
+//
+//    Patient *temp = head, *prev = NULL;
+//    while (temp) {
+//        if (temp->id == id) {
+//            if (prev) prev->next = temp->next;
+//            else head = temp->next;
+//            free(temp); // [PHASE 2 CHANGE]
+//            printf("Patient discharged successfully!\n");
+//            return;
+//        }
+//        prev = temp;
+//        temp = temp->next;
+//    }
+//    printf("Patient ID not found.\n");
+//}
 
 void manageDoctorSchedule() {
     char doctorName[MAX_NAME_LENGTH];
@@ -329,6 +342,161 @@ void generateReports() {
     printf("Report successfully generated in 'report.txt'.\n");
 }
 
+// [PHASE 2 FEATURE] - Log discharged patients with date
+void dischargePatient() {
+    int id;
+    char dischargeDate[11];
+    printf("Enter Patient ID to discharge: ");
+    scanf("%d", &id);
+    getchar();
+
+    Patient *temp = head, *prev = NULL;
+    while (temp) {
+        if (temp->id == id) {
+            printf("Enter Discharge Date (YYYY-MM-DD): ");
+            fgets(dischargeDate, sizeof(dischargeDate), stdin);
+            dischargeDate[strcspn(dischargeDate, "\n")] = '\0';
+
+            FILE *df = fopen(DISCHARGED_FILE, "a");
+            if (df) {
+                fprintf(df, "%d|%s|%d|%s|%d|%s|%s\n", temp->id, temp->name, temp->age, temp->diagnosis,
+                        temp->roomNumber, temp->admissionDate, dischargeDate);
+                fclose(df);
+            } else {
+                printf("Failed to open discharge log file.\n");
+            }
+
+            if (prev) prev->next = temp->next;
+            else head = temp->next;
+            free(temp);
+            printf("Patient discharged and logged successfully!\n");
+            return;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+    printf("Patient ID not found.\n");
+}
+
+// [PHASE 2 FEATURE] - List patients discharged on a specific date
+void listDischargedByDate() {
+    char input[11];
+    printf("Enter discharge date to search (YYYY-MM-DD): ");
+    fgets(input, sizeof(input), stdin);
+    input[strcspn(input, "\n")] = '\0';
+
+    FILE *df = fopen(DISCHARGED_FILE, "r");
+    if (!df) {
+        printf("No discharge records found.\n");
+        return;
+    }
+
+    char line[300];
+    int found = 0;
+    printf("\nDischarged Patients on %s:\n", input);
+    while (fgets(line, sizeof(line), df)) {
+        char *token;
+        char data[7][MAX_DIG_LENGTH];
+        int i = 0;
+        token = strtok(line, "|");
+        while (token && i < 7) {
+            strncpy(data[i], token, MAX_DIG_LENGTH);
+            token = strtok(NULL, "|");
+            i++;
+        }
+        if (i == 7 && strncmp(data[6], input, strlen(input)) == 0) {
+            printf("ID: %s, Name: %s, Age: %s, Diagnosis: %s, Room: %s, Admission: %s, Discharge: %s\n",
+                   data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
+            found = 1;
+        }
+    }
+    fclose(df);
+    if (!found) printf("No patients discharged on this date.\n");
+}
+
+// [PHASE 2 FEATURE] - Count admissions by exact date or partial match
+void admissionStatsByDate() {
+    char input[11];
+    printf("\nEnter a date or prefix (e.g. 2025-04 or 2025-04-01): ");
+    fgets(input, sizeof(input), stdin);
+    input[strcspn(input, "\n")] = '\0';
+
+    int count = 0;
+    Patient *temp = head;
+    while (temp) {
+        if (strncmp(temp->admissionDate, input, strlen(input)) == 0) {
+            count++;
+        }
+        temp = temp->next;
+    }
+
+    if (strlen(input) == 10)
+        printf("Total patients admitted on %s: %d\n", input, count);
+    else if (strlen(input) == 7)
+        printf("Total patients admitted in month %s: %d\n", input, count);
+    else if (strlen(input) == 4)
+        printf("Total patients admitted in year %s: %d\n", input, count);
+    else
+        printf("Total matching admission dates: %d\n", count);
+}
+
+// [PHASE 2 FEATURE] - Doctor utilization report
+void doctorUtilizationReport() {
+    typedef struct {
+        char name[MAX_NAME_LENGTH];
+        int count;
+    } DoctorShift;
+
+    DoctorShift doctors[100];
+    int docCount = 0;
+
+    for (int i = 0; i < DAYS_IN_WEEK; i++) {
+        for (int j = 0; j < SHIFTS_PER_DAY; j++) {
+            if (strlen(schedule[i][j]) == 0) continue;
+            int found = 0;
+            for (int k = 0; k < docCount; k++) {
+                if (strcmp(doctors[k].name, schedule[i][j]) == 0) {
+                    doctors[k].count++;
+                    found = 1;
+                    break;
+                }
+            }
+            if (!found) {
+                strcpy(doctors[docCount].name, schedule[i][j]);
+                doctors[docCount].count = 1;
+                docCount++;
+            }
+        }
+    }
+
+    printf("\nDoctor Utilization Report:\n");
+    for (int i = 0; i < docCount; i++) {
+        printf("%s: %d shift(s)\n", doctors[i].name, doctors[i].count);
+    }
+    if (docCount == 0) {
+        printf("No doctor assignments found.\n");
+    }
+}
+
+// [PHASE 2 FEATURE] - Room usage report (includes current patients and count per room)
+void roomUsageReport() {
+    int roomCount[1000] = {0};
+    Patient *temp = head;
+
+    while (temp) {
+        if (temp->roomNumber >= 0 && temp->roomNumber < 1000) {
+            roomCount[temp->roomNumber]++;
+        }
+        temp = temp->next;
+    }
+
+    printf("\nRoom Usage Report:\n");
+    for (int i = 0; i < 1000; i++) {
+        if (roomCount[i] > 0) {
+            printf("Room %d: %d patient(s)\n", i, roomCount[i]);
+        }
+    }
+}
 
 int main() {
     menu();
